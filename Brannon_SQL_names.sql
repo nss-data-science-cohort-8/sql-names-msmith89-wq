@@ -206,6 +206,25 @@ ORDER BY last_year_used;
 
 --20. Come up with a question that you would like to answer using this dataset. Then write a query to answer this question.
 
+--Find the most and least common names by finding the overall average of number of people registered per name and subtracting this from the total number of people registered per name to find a number registered deviation to measure by.
 
+SELECT 
+     name,
+	 SUM(num_registered) AS total_name_reg,
+	 (SELECT AVG(num_registered) FROM names) AS avg_num_reg,
+	 (SUM(num_registered) - (SELECT AVG(num_registered) FROM names)) AS name_reg_dev 	 
+FROM names
+GROUP BY name
+ORDER BY name_reg_dev DESC;
+
+
+SELECT 
+     name,
+	 SUM(num_registered) AS total_name_reg,
+	 (SELECT AVG(num_registered) FROM names) AS avg_num_reg,
+	 (SUM(num_registered) - (SELECT AVG(num_registered) FROM names)) AS name_reg_dev 	 
+FROM names
+GROUP BY name
+ORDER BY name_reg_dev;        
 
 
